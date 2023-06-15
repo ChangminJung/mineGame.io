@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="changmin">
+    <meta name="date" content="1">
+    <meta name="description" content="1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../HTML05/favicon.ico" type="image/x-icon">
+    <title>1</title>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: solid 1px;
+            border-collapse: collapse;
+            /* 테이블의 선을 합친다. */
+        }
+
+        td,
+        th {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background-color: black;
+            border-color: aliceblue;
+        }
+
+        td:hover,
+        .dot:hover {
+            background-color: gray;
+        }
+
+        td:active,
+        .dot:active {
+            background-color: aliceblue;
+        }
+
+        .dot {
+            background-color: black;
+        }
+
+        caption {
+            font-style: normal;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        body {
+            
+        }
+    </style>
+</head>
+
+<body>
+   
+
+</body>
+
+<script>
+
+    let img = "<img src='../image/panda2.png' alt='깃발' height='30px' width='30px' style='float:left;'>";
+    document.write("<table>");
+    document.write("<caption>지뢰찾기 게임!</caption>")
+    let num = Number(prompt("크기를 입력해주세요. nXn"));
+    let num2 = Number(prompt("지뢰 갯수를 입력해주세요."));
+    let arr = new Array();
+    arr[0] = -1;
+    let arrDotCheck = new Array();
+    arrDotCheck[0] = -1;
+    let dotCount = 0;
+    let celCount = 1;
+    let arrDotCount = [];
+
+    
+
+    for (let i = 0; i < num * num; i++) {
+        arrDotCount[i] = 0;
+    }
+
+    for (let i = 0; i < num2;) {
+
+        let a = Math.floor(Math.random() * (num * num) + 1);
+        for (let k in arr) {
+            if (arr[k] == a) {
+                break;
+            } else if (k == arr.length - 1) {
+                arr[arr.length] = a;
+                arrDotCheck[arrDotCheck.length] = 0;    // Dot 배열 : 초기 0 / 발견 1 / 깃발 2
+                i++;
+                break;
+            } else {
+            }
+        }
+    }
+    arr.sort;
+    console.log(arr.sort());
+    console.log(arrDotCheck);
+    
+    
+    for (let i = 1; i <= num; i++) {
+        document.write("<tr>");
+        for (let j = 1; j <= num; j++) {
+
+            for (let k in arr) {
+                if (arr[k] == celCount) {
+                    document.write("<td id='dot" + k + "' onclick='dotCheck(" + celCount + ");' oncontextmenu='rDotClick(" + celCount + ")'></td>");
+                    console.log(dotCount);
+                    if (celCount - num - 1 < 1 || (celCount - num - 1) % num == 0) {
+
+                    } else {
+                        arrDotCount[celCount - num - 2]++;
+                    }
+                    if (celCount - num < 1) {
+
+                    } else {
+                        arrDotCount[celCount - num - 1]++;
+                    }
+                    if (celCount - num + 1 < 1 || (celCount - num + 1) % num == 1) {
+
+                    } else {
+                        arrDotCount[celCount - num]++;
+                    }
+                    if (celCount - 1 < 1 || (celCount - 1) % num == 0) {
+
+                    } else {
+                        arrDotCount[celCount - 2]++;
+                    }
+                    if (celCount + 1 > num * num || (celCount + 1) % num == 1) {
+
+                    } else {
+                        arrDotCount[celCount]++;
+                    }
+                    if (celCount + num - 1 > num * num || (celCount + num - 1) % num == 0) {
+
+                    } else {
+                        arrDotCount[celCount + num - 2]++;
+                    }
+                    if (celCount + num > num * num) {
+
+                    } else {
+
+                        arrDotCount[celCount + num - 1]++;
+                    }
+                    if (celCount + num + 1 > num * num || (celCount + num + 1) % num == 1) {
+
+                    } else {
+                        arrDotCount[celCount + num]++;
+                    }
+                    dotCount++;
+                    celCount++;
+
+                    break;
+                } else {
+
+                }
+            }
+            if (dotCount >= 1) {
+                dotCount = 0;
+            } else {
+                document.write("<td id='cel" + celCount + "' onclick='celCheck(" + celCount + ");' oncontextmenu='rClick(" + celCount + ")'></td>");
+                celCount++;
+            }
+
+
+
+        }
+        document.write("</tr>");
+    }
+
+
+
+    function dotCheck(a) {
+        let e;
+        for (let k in arr) {
+            if (arr[k] == a) {
+                e = k;
+            }
+        }
+
+        if (!arrCelCheck[a - 1] || !arrCelCheck2[a - 1]) {
+
+        } else {
+            document.getElementById('dot' + e).innerHTML = "<img src='https://e1.pngegg.com/pngimages/200/568/png-clipart-vista-rtm-wow-icon-minesweeper-mine-minesweeper-icon-thumbnail.png' alt='지뢰' height='30px' width='30px' style='float:left;'>";
+            arrDotCheck[e] = 1;
+            alert('지뢰를 밟았습니다.');
+            location.href = './지뢰찾기.html';
+        }
+    }
+
+
+    let arrCelCheck = [];
+    for (let i = 0; i < num * num; i++) {
+        arrCelCheck[i] = true;
+    }
+
+    let arrCelCheck2 = [];
+    for (let i = 0; i < num * num; i++) {
+        arrCelCheck2[i] = true;
+    }
+
+
+    function celCheck(a) {       // a : 1 ~ 25 // arrDotCount[0~24]// cel(1~25) celCheck(1~25)
+
+        if (arrCelCheck[a - 1]) {
+            if (arrDotCount[a - 1] == 0) {
+                document.getElementById('cel' + a).innerHTML = " ";
+                document.getElementById('cel' + a).style = "background-color: gray; color: white;"
+                arrCelCheck[a - 1] = false;
+
+                //위쪽
+                if (a - num < 1) {       // 조건은 1~25
+
+                } else {
+                    if (arrDotCount[a - num - 1] == 0) {
+                        document.getElementById('cel' + (a - num)).innerHTML = " ";
+                        document.getElementById('cel' + (a - num)).style = "background-color: gray; color: white;"
+
+                        celCheck(a - num);
+                    } else {
+                        document.getElementById('cel' + (a - num)).innerHTML = arrDotCount[a - num - 1];
+                        document.getElementById('cel' + (a - num)).style = "background-color: gray; color: white;"
+                        arrCelCheck[a - num - 1] = false;
+
+                    }
+                }
+
+                //왼쪽
+                if (a - 1 < 1 || (a - 1) % num == 0) {
+
+                } else {
+                    if (arrDotCount[a - 2] == 0) {
+                        document.getElementById('cel' + (a - 1)).innerHTML = " ";
+                        document.getElementById('cel' + (a - 1)).style = "background-color: gray; color: white;"
+
+                        celCheck(a - 1);
+                    } else {
+                        document.getElementById('cel' + (a - 1)).innerHTML = arrDotCount[a - 2];
+                        document.getElementById('cel' + (a - 1)).style = "background-color: gray; color: white;"
+                        arrCelCheck[a - 2] = false;
+
+                    }
+                }
+
+                //아래쪽
+                if (a + num > num * num) {
+
+                } else {
+                    if (arrDotCount[a + num - 1] == 0) {
+                        document.getElementById('cel' + (a + num)).innerHTML = " ";
+                        document.getElementById('cel' + (a + num)).style = "background-color: gray; color: white;"
+
+                        celCheck(a + num);
+                    } else {
+                        document.getElementById('cel' + (a + num)).innerHTML = arrDotCount[a + num - 1];
+                        document.getElementById('cel' + (a + num)).style = "background-color: gray; color: white;"
+                        arrCelCheck[a + num - 1] = false;
+
+                    }
+                }
+
+                //오른쪽
+                if (a + 1 > num * num || (a + 1) % num == 1) {
+                } else {
+
+                    if (arrDotCount[a] == 0) {
+                        document.getElementById('cel' + (a + 1)).innerHTML = " ";
+                        document.getElementById('cel' + (a + 1)).style = "background-color: gray; color: white;"
+
+                        celCheck(a + 1);
+                    } else {
+                        document.getElementById('cel' + (a + 1)).innerHTML = arrDotCount[a];
+                        document.getElementById('cel' + (a + 1)).style = "background-color: gray; color: white;"
+                        arrCelCheck[a] = false;
+                    }
+                }
+
+
+            } else {
+                document.getElementById('cel' + (a)).innerHTML = arrDotCount[a - 1];
+                document.getElementById('cel' + (a)).style = "background-color: gray; color: white;"
+                arrCelCheck[a - 1] = false;
+            }
+        } else {
+
+        }
+
+        let sum = 0;
+            for (let k = 1; k <= arrDotCheck.length; k++) {
+                if (arrDotCheck[k] == 2) {
+                    sum += 1;
+                }
+            }
+            if (sum == num2) {
+                let celRun = false;
+                for(let k in arrCelCheck){
+                    if(arrCelCheck[k]){
+                        celRun= true;
+                    }
+                }
+                if(!celRun){
+                    alert('모두 발견하셨습니다!');
+                }
+            }
+    
+
+
+    }
+
+
+    function rDotClick(a) {
+        let e = -1;
+        for (let k in arr) {
+            if (arr[k] == a) {
+                e = k;
+            }
+        }
+        if (arrDotCheck[e] == 1) {  // 발견하고 난 후    
+            return;
+        } else if (arrDotCheck[e] == 0) {  // 발견 전
+            if (arrCelCheck[a - 1]) {
+                if (arrCelCheck2[a - 1]) {
+                    document.getElementById('dot' + e).innerHTML = img;
+                    arrDotCheck[e] = 2;
+                    arrCelCheck2[a - 1] = false;
+                    arrCelCheck[a - 1] = false;
+                }
+            } else {
+                if (!arrCelCheck2[a - 1]) {
+                    document.getElementById('dot' + e).innerHTML = "";
+                    arrDotCheck[e] = 0;
+                    arrCelCheck2[a - 1] = true;
+                    arrCelCheck[a - 1] = true;
+                }
+            }
+            let sum = 0;
+            for (let k = 1; k <= arrDotCheck.length; k++) {
+                if (arrDotCheck[k] == 2) {
+                    sum += 1;
+                }
+            }
+            if (sum == num2) {
+                let celRun = false;
+                for(let k in arrCelCheck){
+                    if(arrCelCheck[k]){
+                        celRun= true;
+                    }
+                }
+                if(!celRun){
+                    alert('모두 발견하셨습니다!');
+                }
+            }
+        } else if (arrDotCheck[e] == 2) {   // 깃발 꼿은 것
+            if (arrCelCheck[a - 1]) {
+                if (arrCelCheck2[a - 1]) {
+                    document.getElementById('dot' + e).innerHTML = img;
+                    arrDotCheck[e] = 2;
+                    arrCelCheck2[a - 1] = false;
+                    arrCelCheck[a - 1] = false;
+                }
+            } else {
+                if (!arrCelCheck2[a - 1]) {
+                    document.getElementById('dot' + e).innerHTML = "";
+                    arrDotCheck[e] = 0;
+                    arrCelCheck2[a - 1] = true;
+                    arrCelCheck[a - 1] = true;
+                }
+            }
+        }
+
+
+    }
+
+
+    function rClick(a) {
+
+        if (arrCelCheck[a - 1]) {
+            if (arrCelCheck2[a - 1]) {
+                document.getElementById('cel' + a).innerHTML = img;
+                arrCelCheck2[a - 1] = false;
+                arrCelCheck[a - 1] = false;
+            }
+        } else {
+            if (!arrCelCheck2[a - 1]) {
+                document.getElementById('cel' + a).innerHTML = "";
+                arrCelCheck2[a - 1] = true;
+                arrCelCheck[a - 1] = true;
+            }
+        }
+
+    }
+
+
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    })
+
+</script>
+
+</html>
